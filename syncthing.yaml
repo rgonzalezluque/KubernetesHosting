@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  syncthing1:
+    image: ghcr.io/syncthing/syncthing:latest
+    container_name: syncthing1
+    hostname: syncthing1
+    networks:
+      - syncthing-net
+    ports:
+      - "8381:8384"    # Interfaz web
+      - "22001:22000"  # Sync TCP
+      - "21026:21026/udp"  # Local discovery
+    volumes:
+      - /volume1/syncA:/var/sync
+      - /volume1/docker/syncthing1:/var/syncthing/config
+    restart: unless-stopped
+
+  syncthing2:
+    image: ghcr.io/syncthing/syncthing:latest
+    container_name: syncthing2
+    hostname: syncthing2
+    networks:
+      - syncthing-net
+    ports:
+      - "8382:8384"
+      - "22002:22000"
+      - "21027:21026/udp"
+    volumes:
+      - /volume1/syncB:/var/sync
+      - /volume1/docker/syncthing2:/var/syncthing/config
+    restart: unless-stopped
+
+  syncthing3:
+    image: ghcr.io/syncthing/syncthing:latest
+    container_name: syncthing3
+    hostname: syncthing3
+    networks:
+      - syncthing-net
+    ports:
+      - "8383:8384"
+      - "22003:22000"
+      - "21028:21026/udp"
+    volumes:
+      - /volume1/syncC:/var/sync
+      - /volume1/docker/syncthing3:/var/syncthing/config
+    restart: unless-stopped
+
+networks:
+  syncthing-net:
+    driver: bridge
