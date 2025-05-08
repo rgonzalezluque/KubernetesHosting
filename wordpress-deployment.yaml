@@ -1,0 +1,170 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress-deployment1
+  namespace: wordpress
+  labels:
+    app: wordpress
+    type: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress
+      type: frontend
+  template:
+    metadata:
+      labels:
+        app: wordpress
+        type: frontend
+    spec:
+      containers:
+        - name: wordpress
+          image: wordpress
+          ports:
+            - containerPort: 80
+              name: http-port
+            - containerPort: 443
+              name: https-port
+          env:
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-wordpress-secret
+                  key: dbuser
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-wordpress-secret
+                  key: dbname
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-wordpress-secret
+                  key: dbpassword
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-wordpress-secret
+                  key: dbrootpassword
+          volumeMounts:
+            - name: volumen-wordpress
+              mountPath: /var/www/html
+      volumes:
+        - name: volumen-wordpress
+          persistentVolumeClaim:
+            claimName: wordpress-pvc1
+—
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress-deployment2
+  namespace: wordpress
+  labels:
+    app: wordpress
+    type: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress
+      type: frontend
+  template:
+    metadata:
+      labels:
+        app: wordpress
+        type: frontend
+    spec:
+      containers:
+        - name: wordpress
+          image: wordpress
+          ports:
+            - containerPort: 80
+              name: http-port
+            - containerPort: 443
+              name: https-port
+          env:
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-wordpress-secret
+                  key: dbuser
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-wordpress-secret
+                  key: dbname
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-wordpress-secret
+                  key: dbpassword
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-wordpress-secret
+                  key: dbrootpassword
+          volumeMounts:
+            - name: volumen-wordpress
+              mountPath: /var/www/html
+      volumes:
+        - name: volumen-wordpress
+          persistentVolumeClaim:
+            claimName: wordpress-pvc2
+—
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress-deployment3
+  namespace: wordpress
+  labels:
+    app: wordpress
+    type: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress
+      type: frontend
+  template:
+    metadata:
+      labels:
+        app: wordpress
+        type: frontend
+    spec:
+      containers:
+        - name: wordpress
+          image: wordpress
+          ports:
+            - containerPort: 80
+              name: http-port
+            - containerPort: 443
+              name: https-port
+          env:
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-wordpress-secret
+                  key: dbuser
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-wordpress-secret
+                  key: dbname
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-wordpress-secret
+                  key: dbpassword
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-wordpress-secret
+                  key: dbrootpassword
+          volumeMounts:
+            - name: volumen-wordpress
+              mountPath: /var/www/html
+      volumes:
+        - name: volumen-wordpress
+          persistentVolumeClaim:
+            claimName: wordpress-pvc3
