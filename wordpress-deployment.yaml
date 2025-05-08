@@ -168,4 +168,3 @@ spec:
         - name: volumen-wordpress
           persistentVolumeClaim:
             claimName: wordpress-pvc3
-a
