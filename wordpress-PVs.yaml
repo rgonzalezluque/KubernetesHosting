@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: volumen-wordpress1
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  nfs:
+    path: /volume1/docker/syncthing1/Kubernetes_Wordpress1
+    server: 10.110.14.143
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: volumen-wordpress2
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  nfs:
+    path: /volume1/docker/syncthing2/Kubernetes_Wordpress2
+    server: 10.110.14.143
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: volumen-wordpress3
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  nfs:
+    path: /volume1/docker/syncthing3/Kubernetes_Wordpress3
+    server: 10.110.14.143
